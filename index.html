@@ -1,0 +1,2432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sajjad Safari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Vazirmatn:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+:root {
+  /* University of Delaware palette */
+  --bg: #ffffff;
+  --bg-2: #eee8c5;          /* UD cream */
+  --ink: #000000;
+  --ink-2: #003c71;         /* UD navy */
+  --ink-3: #6e6e6e;         /* darkened cool gray for readability */
+  --rule: #bdbdbd;          /* UD cool gray */
+  --accent: #00539f;        /* UD blue */
+  --accent-2: #ffd200;      /* UD yellow */
+  --accent-3: #00a0df;      /* UD light blue */
+  --accent-soft: #cfe4f3;   /* soft UD blue tint */
+  --serif: "Calibri", "Carlito", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Calibri", "Carlito", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --mono: "Consolas", "Cascadia Mono", "JetBrains Mono", ui-monospace, monospace;
+  --farsi: "Noto Naskh Arabic", "Vazirmatn", "Instrument Serif", serif;
+  --farsi-sans: "Vazirmatn", "Noto Naskh Arabic", serif;
+}
+
+html.dark {
+  --bg: #003c71;            /* UD navy */
+  --bg-2: #002a52;
+  --ink: #ffffff;
+  --ink-2: #eee8c5;         /* cream */
+  --ink-3: #a8b6c8;
+  --rule: #1f4878;
+  --accent: #ffd200;        /* yellow pops on navy */
+  --accent-2: #00a0df;
+  --accent-soft: #1f4878;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color .2s, color .2s;
+}
+a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-3); }
+
+/* Top nav */
+nav.top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+nav.top .inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 40px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+nav.top .brand {
+  font-family: var(--serif);
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+nav.top .brand .fa { font-family: var(--farsi-sans); margin-left: 10px; color: var(--accent); font-size: 17px; font-weight: 400; }
+nav.top ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 26px; }
+nav.top a {
+  border: none;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+nav.top a:hover { color: var(--accent); }
+
+/* Layout */
+main { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+section { padding: 96px 0; border-bottom: 1px solid var(--rule); }
+section:last-of-type { border-bottom: none; }
+.section-head {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+  align-items: baseline;
+}
+.section-head .label { padding-top: 6px; }
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Hero */
+.hero { padding: 80px 0 110px; border-bottom: 1px solid var(--rule); }
+.hero .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  color: var(--ink-3);
+}
+.hero .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display:inline-block; }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero .farsi {
+  font-family: var(--farsi);
+  direction: rtl;
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1.4;
+  color: var(--ink-2);
+  letter-spacing: 0;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+.hero .lede {
+  max-width: 680px;
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  font-family: var(--serif);
+  font-style: italic;
+  margin: 0 0 40px;
+}
+.hero .meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.hero .meta .k { display: block; margin-bottom: 6px; }
+.hero .meta .v { font-size: 15px; color: var(--ink); }
+
+/* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+.about-grid p {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 0 0 22px;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.about-grid p:last-child { margin-bottom: 0; }
+.about-photo {
+  position: sticky;
+  top: 100px;
+}
+.about-photo image-slot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+.about-photo .caption {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* Research */
+.research-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+}
+.research-body { max-width: 720px; }
+.research-body > p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  color: var(--ink-2);
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink-2);
+}
+
+/* Publications */
+.pubs { display: flex; flex-direction: column; }
+.pub {
+  display: grid;
+  grid-template-columns: 60px 1fr 100px;
+  gap: 32px;
+  padding: 26px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.pub:last-child { border-bottom: 1px solid var(--rule); }
+.pub .year { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+.pub .title {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.pub .venue { font-size: 14px; color: var(--ink-3); font-style: italic; }
+.pub .type {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pub-cta { margin-top: 32px; }
+
+/* Section intro */
+.section-intro {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: 720px;
+  margin: -24px 0 56px;
+  font-style: italic;
+}
+
+/* Projects */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.project {
+  display: grid;
+  grid-template-columns: 70px 1fr 1.3fr;
+  gap: 40px;
+  padding: 48px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+.project:last-child { border-bottom: 1px solid var(--rule); }
+.project-num {
+  font-size: 11px;
+  color: var(--ink-3);
+  padding-top: 6px;
+}
+.project-media {
+  position: relative;
+}
+.project-media image-slot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.project-tag { color: var(--accent); }
+.project-body h3 {
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+  font-weight: 400;
+}
+.project-body p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+.project-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 28px;
+  margin: 12px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+.project-meta > div { margin: 0; }
+.project-meta dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  margin: 0 0 3px;
+}
+.project-meta dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+/* Album variant, used by the coastal project to show multiple photos */
+.project-album {
+  grid-template-columns: 70px 1fr;
+  grid-template-areas:
+    "num body"
+    ".   album";
+  row-gap: 32px;
+}
+.project-album .project-num { grid-area: num; }
+.project-album .project-body { grid-area: body; max-width: 720px; }
+.project-album .project-album-grid,
+.project-album .project-sweep { grid-area: album; }
+.project-album .project-sweep { min-width: 0; }
+.project-album-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 240px;
+  gap: 14px;
+}
+.project-album-grid > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+}
+.album-cell { background: var(--bg-2); }
+.album-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.album-cell figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  margin: 0;
+  padding: 22px 16px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,0.62), transparent);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.album-cell:hover figcaption { opacity: 1; }
+
+/* Project sweeping marquee (Field projects) */
+.project-sweep {
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+.project-sweep-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: photo-sweep 60s linear infinite;
+}
+.project-sweep-track.js-driven { animation: none !important; }
+.project-sweep:hover .project-sweep-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .project-sweep-track { animation: none; }
+}
+.project-sweep .album-cell {
+  flex: 0 0 auto;
+  height: 300px;
+  width: auto;
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+  background: var(--bg-2);
+}
+.project-sweep .album-cell img {
+  height: 300px;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Teaching */
+.teach-instructor {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+.teach-instructor .mono { font-size: 10px; color: var(--ink-3); }
+.teach-instructor a {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--accent);
+  border-bottom: none;
+  line-height: 1.2;
+}
+.teach-instructor a:hover { color: var(--ink); }
+.teaching-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.teach-card {
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.teach-card header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.teach-term { color: var(--ink-3); font-size: 11px; }
+.teach-course {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.teach-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.teach-card-feature {
+  grid-column: span 2;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 36px 40px;
+}
+.teach-card-feature .teach-course { font-size: 30px; }
+
+.eval-block {
+  margin-top: 8px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.eval-head { color: var(--accent); font-size: 11px; }
+.eval-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.eval-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 18px;
+  border-right: 1px solid var(--rule);
+}
+.eval-item:last-child { border-right: none; padding-right: 0; }
+.eval-num {
+  font-family: var(--serif);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+.eval-num span {
+  font-size: 16px;
+  color: var(--ink-3);
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+.eval-headline .eval-num { color: var(--accent); }
+.eval-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  line-height: 1.3;
+}
+.eval-block blockquote {
+  margin: 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-2);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.eval-block blockquote cite {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  font-style: normal;
+}
+
+/* Talks variant — small photo thumbnail at the LEFT; hover zooms it into a larger preview */
+.pub-talk {
+  grid-template-columns: 60px 1fr 100px;
+  align-items: start;
+  gap: 0 28px;
+  position: relative;
+  transition: transform .3s ease;
+}
+.pub-talk:hover,
+.pub-talk:focus-within { transform: translateY(-2px); }
+
+/* left column: year text with the small thumbnail stacked beneath it */
+.pub-talk .year {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.talk-thumb {
+  width: 56px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.16);
+  cursor: zoom-in;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.pub-talk:hover .talk-thumb,
+.pub-talk:focus-within .talk-thumb {
+  transform: scale(1.06);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.22);
+}
+
+/* hover: the larger preview opens inline below the text, pushing the row down */
+.pub-talk .talk-media {
+  display: flex;
+  gap: 8px;
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: max-height .42s cubic-bezier(.22,.61,.36,1), opacity .3s ease, margin-top .42s cubic-bezier(.22,.61,.36,1);
+}
+.pub-talk .talk-media figure {
+  position: relative;
+  margin: 0;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+  flex: 0 0 auto;
+}
+.pub-talk .talk-media img {
+  height: 240px;
+  width: auto;
+  display: block;
+}
+.pub-talk .talk-media figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  margin: 0;
+  padding: 22px 12px 10px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,0.66), transparent);
+}
+.pub-talk:hover .talk-media,
+.pub-talk:focus-within .talk-media {
+  max-height: 260px;
+  margin-top: 14px;
+  opacity: 1;
+  pointer-events: auto;
+}
+.pub-talk .type { grid-column: 3; }
+.slides-link {
+  display: inline-block;
+  margin-top: 9px;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+}
+.slides-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Publications group labels */
+.pub-group-label {
+  margin: 0 0 4px;
+  padding-top: 8px;
+}
+.pub-group-label + .pubs { margin-bottom: 40px; }
+
+/* Experience */
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+}
+.col-label {
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.timeline { display: flex; flex-direction: column; gap: 22px; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+.tl-year { font-size: 11px; color: var(--ink-3); padding-top: 4px; }
+.tl-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.tl-sub { font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+.tl-note { font-size: 13px; color: var(--ink-3); line-height: 1.5; margin-top: 4px; }
+.tl-note em { color: var(--ink-2); }
+
+/* Beyond */
+.beyond-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.card.dark {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.card.dark .mono { color: color-mix(in oklab, var(--bg) 60%, transparent); }
+.card h3 {
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.card p { margin: 0; font-size: 15px; line-height: 1.5; color: inherit; opacity: 0.85; }
+.card .stat {
+  font-family: var(--serif);
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.card .stat .unit { font-size: 18px; font-family: var(--sans); color: var(--ink-3); margin-left: 6px; }
+
+.beyond-grid .running { grid-column: span 3; }
+.beyond-grid .swimming { grid-column: span 3; }
+.beyond-grid .marathon-stat { grid-column: span 3; }
+.beyond-grid .music { grid-column: span 3; }
+.beyond-grid .photo-row {
+  grid-column: span 12;
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+.beyond-grid .photo-track {
+  display: flex;
+  gap: 6px;
+  width: max-content;
+  animation: photo-sweep 50s linear infinite;
+}
+.beyond-grid .photo-track.js-driven { animation: none !important; }
+.beyond-grid .photo-row:hover .photo-track { animation-play-state: paused; }
+@keyframes photo-sweep {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 8px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .beyond-grid .photo-track { animation: none; }
+}
+.beyond-grid image-slot { width: 100%; height: 100%; }
+.beyond-grid .photo-cell {
+  flex: 0 0 auto;
+  height: 340px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-2);
+}
+.beyond-grid .photo-cell img { height: 100%; width: auto; display: block; }
+.beyond-grid .photo-cell figcaption {
+  position: absolute;
+  left: 0; bottom: 0;
+  margin: 0;
+  padding: 16px 18px 12px;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.beyond-grid .photo-cell:hover figcaption { opacity: 1; }
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-grid h2 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 32px;
+  font-weight: 400;
+}
+.contact-grid h2 em { font-style: italic; color: var(--accent); }
+.contact-list { display: flex; flex-direction: column; gap: 2px; }
+.contact-list a {
+  display: grid;
+  grid-template-columns: 120px 1fr 20px;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+  border-top: none;
+  font-size: 16px;
+}
+.contact-list a .label { font-family: var(--mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.contact-list a .val { color: var(--ink); }
+.contact-list a .arrow { color: var(--ink-3); transition: transform .2s, color .2s; }
+.contact-list a:hover { color: var(--ink); }
+.contact-list a:hover .arrow { transform: translateX(4px); color: var(--accent); }
+.contact-list a:hover .val { color: var(--accent); }
+
+/* Footer */
+footer {
+  padding: 40px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  nav.top .inner { padding: 14px 22px; }
+  nav.top ul { gap: 16px; }
+  main { padding: 0 22px; }
+  section { padding: 64px 0; }
+  .section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 32px; }
+  .section-head h2 { font-size: 32px; }
+  .hero { padding: 56px 0 72px; }
+  .hero .meta { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-photo { position: static; }
+  .research-grid { grid-template-columns: 1fr; }
+  .pub { grid-template-columns: 1fr; gap: 6px; }
+  .pub .type { text-align: left; }
+  .pubs-talks .pub-talk .year, .pub-talk .year { grid-column: 1; }
+  .pubs-talks .pub-talk image-slot, .pub-talk image-slot {
+    /* on mobile show photos inline below the text */
+    position: static;
+    transform: none;
+    opacity: 1;
+    max-height: none;
+    margin-top: 12px;
+    pointer-events: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    box-shadow: none;
+    grid-column: 1;
+  }
+  .pubs-talks .pub-talk image-slot::after, .pub-talk image-slot::after { display: none; }
+  .pubs-talks .pub-talk .type, .pub-talk .type { text-align: left; grid-column: 1; }
+  .pubs-talks .pub-talk, .pub-talk { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+  .beyond-grid > * { grid-column: span 12 !important; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-list a { grid-template-columns: 90px 1fr 20px; }
+  .teaching-grid { grid-template-columns: 1fr; }
+  .teach-card-feature { grid-column: span 1; padding: 24px; }
+  .eval-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+  .eval-item:nth-child(2n) { border-right: none; padding-right: 0; }
+  .eval-item { padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+  .eval-item:nth-last-child(-n+2) { border-bottom: none; padding-bottom: 0; }
+  .exp-grid { grid-template-columns: 1fr; gap: 40px; }
+  .project { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
+  .project-num { padding-top: 0; }
+  .project-meta { grid-template-columns: 1fr; }
+  .project-album { grid-template-columns: 1fr; grid-template-areas: "num" "body" "album"; }
+  .project-album-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; }
+  .project-album-grid > *:nth-child(1) { grid-column: 1 / -1; aspect-ratio: 4/3; }
+  .section-intro { margin-top: -8px; font-size: 18px; }
+}
+
+/* ============ ADDITIONS ============ */
+
+/* Nav dropdowns */
+nav.top li.has-sub { position: relative; }
+nav.top .subnav {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px;
+  margin: 0;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.16);
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+  z-index: 60;
+}
+nav.top .subnav::before {
+  /* hover bridge so the menu doesn't close in the gap */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -16px; height: 16px;
+}
+nav.top li.has-sub:hover .subnav,
+nav.top li.has-sub:focus-within .subnav {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+nav.top .subnav li { display: block; }
+nav.top .subnav a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--ink-2);
+  border: none;
+  border-radius: 3px;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+nav.top .subnav a:hover { color: var(--accent); background: var(--bg-2); }
+nav.top li.has-sub > a { position: relative; }
+nav.top li.has-sub > a::after {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-left: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  opacity: 0.5;
+  transition: transform .2s, opacity .2s;
+}
+nav.top li.has-sub:hover > a::after { opacity: 1; transform: translateY(0) rotate(45deg); }
+
+/* Justify multi-line prose */
+.about-grid p,
+.research-body > p,
+.section-intro,
+.hero .lede,
+.project-body p,
+.teach-card p,
+.card p,
+.contact-grid p > .seek,
+.expertise-item p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Expertise section */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 40px;
+}
+.expertise-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 2px solid var(--accent);
+}
+.expertise-item h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.expertise-item p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Method tags on project cards */
+.method-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+.method-tags .mtag {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--accent);
+}
+
+/* Photo credit lines */
+.photo-credit {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 16px;
+}
+.project-sweep + .sweep-credit {
+  grid-area: album;
+  margin-top: 10px;
+}
+
+/* Teaching restructure */
+.teaching-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.teach-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.teach-badge {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  margin-bottom: 4px;
+}
+
+/* Beyond, three boxes */
+.beyond-grid .b-physical,
+.beyond-grid .b-numbers,
+.beyond-grid .b-mental { grid-column: span 4; }
+.beyond-grid .b-big {
+  font-family: var(--serif);
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 2px 0 6px;
+  font-weight: 400;
+}
+.num-lines { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.num-lines .nl {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid color-mix(in oklab, currentColor 22%, transparent);
+}
+.num-lines .nl:last-child { border-bottom: none; padding-bottom: 0; }
+.num-lines .nl b {
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+.num-lines .nl span { font-size: 13.5px; line-height: 1.4; }
+
+@media (max-width: 880px) {
+  nav.top .subnav { display: none; }
+  nav.top li.has-sub > a::after { display: none; }
+  .expertise-grid { grid-template-columns: 1fr; gap: 22px; }
+  .teach-trio { grid-template-columns: 1fr; }
+  .beyond-grid .b-physical,
+  .beyond-grid .b-numbers,
+  .beyond-grid .b-mental { grid-column: span 12; }
+}
+</style>
+</head>
+<body style="background-color: rgb(0, 60, 113)">
+
+<nav class="top">
+  <div class="inner">
+    <div class="brand">Sajjad Safari<span class="fa">سجاد صفری</span></div>
+    <ul>
+      <li class="has-sub">
+        <a href="#about">About</a>
+        <ul class="subnav">
+          <li><a href="#about-bio">Biography</a></li>
+          <li><a href="#about-seeking">What I'm seeking</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="#research">Research</a>
+        <ul class="subnav">
+          <li><a href="#research-dissertation">Dissertation</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="#projects">Projects</a>
+        <ul class="subnav">
+          <li><a href="#p01">Culvert rehabilitation</a></li>
+          <li><a href="#p02">Railway vibration</a></li>
+          <li><a href="#p03">Hydraulic structures</a></li>
+          <li><a href="#p04">Rail monitoring (FRA)</a></li>
+          <li><a href="#p05">Coastal infrastructure</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="#publications">Publications</a>
+        <ul class="subnav">
+          <li><a href="#pub-journal">Journal articles</a></li>
+          <li><a href="#pub-conf">Conference &amp; reports</a></li>
+          <li><a href="#pub-talks">Invited talks &amp; lectures</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="#teaching">Teaching</a>
+        <ul class="subnav">
+          <li><a href="#teach-upcoming">Structural Analysis &amp; Design</a></li>
+          <li><a href="#teach-608">CIEG 608 Bridge Engineering</a></li>
+          <li><a href="#teach-214">CIEG 214 Construction Materials</a></li>
+          <li><a href="#teach-steel">Advanced Steel Structures</a></li>
+          <li><a href="#teach-tutor">Math &amp; Physics tutoring</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="#experience">Experience</a>
+        <ul class="subnav">
+          <li><a href="#exp-education">Education</a></li>
+          <li><a href="#exp-awards">Awards &amp; honors</a></li>
+          <li><a href="#exp-service">Leadership &amp; service</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="#beyond">Beyond</a>
+        <ul class="subnav">
+          <li><a href="#beyond-physical">Physical health</a></li>
+          <li><a href="#beyond-numbers">By the numbers</a></li>
+          <li><a href="#beyond-mental">Mental health</a></li>
+        </ul>
+      </li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="top" data-screen-label="01 Hero">
+    <div class="eyebrow mono"><span class="dot"></span> Structural Engineering PhD candidate · University of Delaware · defending Aug 2026</div>
+    <h1>Sajjad<br>Safari<em style="color: rgb(255, 205, 54);">.</em></h1>
+    <div class="farsi">سجاد صفری</div>
+    <p class="lede">
+      Computer vision researcher and structural AI engineer, building the
+      sensing systems that let ordinary cameras measure what contact sensors
+      cannot: displacement, strain, and dynamic response of infrastructure
+      under real load.
+    </p>
+    <div class="meta">
+      <div>
+        <span class="k mono">Institution</span>
+        <span class="v">University of Delaware</span>
+      </div>
+      <div>
+        <span class="k mono">Advisor</span>
+        <span class="v">Prof. Monique Head</span>
+      </div>
+      <div>
+        <span class="k mono">Focus</span>
+        <span class="v">Computer vision, data fusion, structural AI</span>
+      </div>
+      <div>
+        <span class="k mono">Born</span>
+        <span class="v">Tehran, 1993</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" data-screen-label="02 About">
+    <div class="section-head">
+      <div class="label mono">§ 01, About</div>
+      <h2>A short<br><em style="font-style: italic; color: rgb(255, 210, 0)">biography.</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="images/headshot.jpg" alt="Sajjad Safari" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: contrast(1.02);">
+        <div class="caption">
+          <span class="mono">Fig. 01, Newark, DE</span>
+          <span class="mono">2025</span>
+        </div>
+      </div>
+      <div class="about-text" id="about-bio">
+        <p>
+          I'm a <span style="color: var(--accent);">computer vision and structural AI researcher</span>
+          completing my Ph.D. at the University of Delaware, advised by Prof. Monique Head in the
+          <a href="https://sites.udel.edu/head/" target="_blank" rel="noopener">HEAD Research Group</a>.
+          My dissertation, <em>“Formulations for Data-Fusion-Enhanced Deployment of Digital Image
+          Correlation Systems in Structural Evaluation,”</em> builds end-to-end measurement
+          pipelines that extract structural state from ordinary camera footage: dense
+          sub-pixel motion tracking, multi-modal sensor fusion, signal processing, and
+          physics-informed finite element model calibration, deployed in the field on
+          bridges, culverts, railways, and coastal structures.
+        </p>
+        <p>
+          I approach problems from both ends: I design and execute field
+          investigations (five structures across four states, under live traffic,
+          active rail load, and tidal cycles), and I build the computational
+          frameworks that turn raw vision data into defensible engineering
+          assessments. My work sits at the intersection of computer vision, applied
+          signal processing, and structural mechanics.
+        </p>
+        <p>
+          Born in Tehran in 1993, I trained as a civil engineer at the University of
+          Tehran before moving to Newark, DE in 2021. I run, a marathon under the
+          belt, take photographs (a habit since 2014), and pay attention to music
+          and art as the rest of the rhythm.
+        </p>
+        <p id="about-seeking">
+          I am seeking roles in applied computer vision, AI for physical systems,
+          and technical consulting, particularly where rigorous measurement, field
+          judgment, and computational thinking need to work together.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research" data-screen-label="03 Research">
+    <div class="section-head">
+      <div class="label mono" style="color: rgb(184, 192, 191);">§ 02, Research</div>
+      <h2>What I'm<br>working on.</h2>
+    </div>
+    <div class="research-grid">
+      <div class="mono" style="color: rgb(184, 192, 191);">Dissertation</div>
+      <div class="research-body" id="research-dissertation">
+        <span class="mono" style="color: var(--accent); display:block; margin-bottom: 14px;">Working title · defending Aug 2026</span>
+        <p style="font-family: var(--serif); font-size: 28px; line-height: 1.25; color: var(--ink); font-weight: 400; letter-spacing: -0.01em; margin: 0;">
+          Formulations for <em style="color: var(--accent); font-style: italic;">Data-Fusion-Enhanced</em> Deployment
+          of Digital Image Correlation Systems in Structural Evaluation.
+        </p>
+        <p style="margin-top: 18px; font-size: 14px; color: var(--ink-3); font-family: var(--mono); letter-spacing: 0.02em;">
+          Short form, a data-fusion-driven approach for structural evaluation using DIC.
+        </p>
+        <p style="margin-top: 28px;">
+          I develop <strong>computer vision systems for quantitative structural
+          assessment</strong>, using Digital Image Correlation (DIC) to extract
+          displacement, strain, and dynamic response from image sequences, then
+          fusing that data with accelerometers and physics-based finite element
+          models to characterize structural state and calibrate load ratings. The
+          work covers the full pipeline: field instrumentation and deployment,
+          signal processing and virtual sensor synthesis, data fusion
+          architectures, and FE model updating. Applied to bridges, culverts, rail,
+          and coastal infrastructure under real-world load conditions.
+        </p>
+        <p>
+          Advised by <a href="https://sites.udel.edu/head/" target="_blank" rel="noopener">Prof. Monique Head</a>
+          in the <a href="https://www.ce.udel.edu/" target="_blank" rel="noopener">Department of Civil &amp; Environmental Engineering</a>
+          at the University of Delaware.
+        </p>
+        <div class="tags">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Digital Image Correlation</span>
+          <span class="tag">Data Fusion</span>
+          <span class="tag">Signal Processing</span>
+          <span class="tag">Structural Health Monitoring</span>
+          <span class="tag">Finite Element Model Updating</span>
+          <span class="tag">Applied ML</span>
+          <span class="tag">Bridge Engineering</span>
+          <span class="tag">Nondestructive Evaluation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="research-grid" id="expertise" style="margin-top: 76px; padding-top: 56px; border-top: 1px solid var(--rule);">
+      <div class="mono" style="color: rgb(184, 192, 191);">Expertise</div>
+      <div class="research-body" style="max-width: 940px;">
+        <span class="mono" style="color: var(--accent); display:block; margin-bottom: 26px;">The toolkit</span>
+        <div class="expertise-grid">
+          <div class="expertise-item">
+            <h3>Computer Vision &amp; Sensing</h3>
+            <p>Digital Image Correlation (DIC), dense sub-pixel motion tracking, Imetrum DMS, camera calibration, non-contact field instrumentation.</p>
+          </div>
+          <div class="expertise-item">
+            <h3>Data Fusion &amp; Modeling</h3>
+            <p>Multi-modal sensor fusion (vision + IMU + contact sensors), physics-informed FE model updating, virtual sensor synthesis, Kalman-type state estimation.</p>
+          </div>
+          <div class="expertise-item">
+            <h3>Signal Processing</h3>
+            <p>Empirical mode decomposition, wavelet denoising, STFT, Butterworth filtering, modal analysis, dynamic time warping.</p>
+          </div>
+          <div class="expertise-item">
+            <h3>ML &amp; Scientific Computing</h3>
+            <p>scikit-learn (regression, feature selection), Python (NumPy, SciPy, pandas, matplotlib), MATLAB.</p>
+          </div>
+          <div class="expertise-item">
+            <h3>Structural Analysis</h3>
+            <p>ABAQUS, SAP2000, ETABS, OpenSees; load rating per AASHTO.</p>
+          </div>
+          <div class="expertise-item">
+            <h3>Field Methods</h3>
+            <p>Diagnostic load testing, structural field investigation, live-traffic and live-load deployments, NDT.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" data-screen-label="04 Projects">
+    <div class="section-head">
+      <div class="label mono">§ 03, Field projects</div>
+      <h2>Out in the<br><em>real world.</em></h2>
+    </div>
+    <p class="section-intro">
+      Five years of field deployments, culverts in Delaware, a railway-adjacent
+      building, a river bridge, a high-tonnage rail loop in Pueblo, and a
+      coastal site. Each one a stress test for the methods.
+    </p>
+    <p class="photo-credit" style="margin: -32px 0 44px;">Field photographs courtesy of the HEAD Research Group, University of Delaware.</p>
+
+    <div class="projects">
+
+      <article class="project project-album" id="p01">
+        <div class="project-num mono">P / 01</div>
+        <div class="project-body">
+          <span class="mono project-tag">Culvert rehabilitation · DelDOT</span>
+          <h3>Structural performance verification of spray-applied pipe liners for corroded CMPs.</h3>
+          <p>
+            Diagnostic load testing and vision-based assessment of a corroded
+            corrugated metal pipe culvert, before and after rehabilitation with a
+            spray-applied pipe liner (SAPL). Field deployments, full-scale testing,
+            and finite element model calibration to support a national design
+            standard.
+          </p>
+          <div class="method-tags"><span class="mtag">DIC</span><span class="mtag">FE model updating</span><span class="mtag">diagnostic load testing</span></div>
+          <dl class="project-meta">
+            <div><dt class="mono">PI</dt><dd>Prof. Monique Head</dd></div>
+            <div><dt class="mono">Co-PIs</dt><dd>Shenton, Tatar, Chajes (UD)</dd></div>
+            <div><dt class="mono">Sponsor</dt><dd>Delaware DOT</dd></div>
+            <div><dt class="mono">My role</dt><dd>Field testing, DIC, model updating, writing</dd></div>
+            <div><dt class="mono">Outputs</dt><dd>2 journal articles, 3 conference papers</dd></div>
+          </dl>
+        </div>
+        <div class="project-sweep">
+          <div class="project-sweep-track">
+<figure class="album-cell">
+            <img src="images/culvert-sapl.jpg" alt="Lining the CMP with SAPL">
+            <figcaption>Lining the CMP with SAPL</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/culvert-trucks.jpg" alt="Gary guiding the load trucks">
+            <figcaption>Gary guiding the load trucks</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/culvert-sensors.jpg" alt="Gary &amp; Tyler DuBose mounting sensors on the lined culvert">
+            <figcaption>Gary &amp; Tyler DuBose mounting sensors on the lined culvert</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/culvert-shenton.jpg" alt="HRG team with Dr. Shenton">
+            <figcaption>HRG team with Dr. Shenton</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/culvert-sapl.jpg" alt="Lining the CMP with SAPL">
+            <figcaption>Lining the CMP with SAPL</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/culvert-trucks.jpg" alt="Gary guiding the load trucks">
+            <figcaption>Gary guiding the load trucks</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/culvert-sensors.jpg" alt="Gary &amp; Tyler DuBose mounting sensors on the lined culvert">
+            <figcaption>Gary &amp; Tyler DuBose mounting sensors on the lined culvert</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/culvert-shenton.jpg" alt="HRG team with Dr. Shenton">
+            <figcaption>HRG team with Dr. Shenton</figcaption>
+          </figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project project-album" id="p02">
+        <div class="project-num mono">P / 02</div>
+        <div class="project-body">
+          <span class="mono project-tag">Vibration monitoring · Havre de Grace, MD</span>
+          <h3>Non-contact monitoring of a railway bridge and adjacent building.</h3>
+          <p>
+            Evaluation of train-induced vibrations propagating into a building
+            near an active rail line. Combined open-source MEMS accelerometers
+            with vision-based displacement measurement to characterize the
+            structure's dynamic response without instrumenting it traditionally.
+          </p>
+          <div class="method-tags"><span class="mtag">vision + MEMS fusion</span><span class="mtag">modal analysis</span></div>
+          <dl class="project-meta">
+            <div><dt class="mono">Methods</dt><dd>MEMS accelerometers · DIC · modal analysis</dd></div>
+            <div><dt class="mono">My role</dt><dd>Instrumentation, data processing, co-authorship</dd></div>
+            <div><dt class="mono">Published</dt><dd>Head et al., 11th NYC Bridge Conference (2023)</dd></div>
+          </dl>
+        </div>
+        <div class="project-sweep">
+          <div class="project-sweep-track">
+<figure class="album-cell">
+            <img src="images/rail-vib-night.jpg" alt="Railway bridge at night">
+            <figcaption>Railway bridge at night</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/rail-vib-team.jpg" alt="UD team mounting sensors for vibration propagation">
+            <figcaption>UD team mounting sensors for vibration propagation</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/rail-vib-setup.jpg" alt="Setup, getting ready for cargo passes">
+            <figcaption>Setup, getting ready for cargo passes</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/rail-vib-night.jpg" alt="Railway bridge at night">
+            <figcaption>Railway bridge at night</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/rail-vib-team.jpg" alt="UD team mounting sensors for vibration propagation">
+            <figcaption>UD team mounting sensors for vibration propagation</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/rail-vib-setup.jpg" alt="Setup, getting ready for cargo passes">
+            <figcaption>Setup, getting ready for cargo passes</figcaption>
+          </figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project project-album" id="p03">
+        <div class="project-num mono">P / 03</div>
+        <div class="project-body">
+          <span class="mono project-tag">Hydraulic structures · CIAMTIS UTC</span>
+          <h3>Live-traffic evaluation of a bridge over water.</h3>
+          <p>
+            Multi-robot teaming for inspection of hydraulic structures , 
+            combining aerial and ground platforms with computer-vision
+            measurement to assess a river bridge under live traffic. The work
+            fed into a data fusion framework for FE model updating of short-span
+            bridges.
+          </p>
+          <div class="method-tags"><span class="mtag">multi-robot</span><span class="mtag">multimodal computer vision</span><span class="mtag">data fusion</span></div>
+          <dl class="project-meta">
+            <div><dt class="mono">Collaborators</dt><dd>Lattanzi &amp; Aminfar (GMU), Head (UD)</dd></div>
+            <div><dt class="mono">Sponsor</dt><dd>CIAMTIS · University Transportation Center</dd></div>
+            <div><dt class="mono">My role</dt><dd>Vision-based sensing, model updating</dd></div>
+            <div><dt class="mono">Outputs</dt><dd>Tech. report (2024) · IABMAS 2026</dd></div>
+          </dl>
+        </div>
+        <div class="project-sweep">
+          <div class="project-sweep-track">
+<figure class="album-cell">
+            <img src="images/river-camera.jpg" alt="Imetrum DMS camera trained on the span">
+            <figcaption>Imetrum DMS camera trained on the span</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/river-traffic.jpg" alt="Monitoring live-load traffic">
+            <figcaption>Monitoring live-load traffic</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/river-setup.jpg" alt="Setting up the DMS camera &amp; controller">
+            <figcaption>Setting up the DMS camera &amp; controller</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/river-team.jpg" alt="HRG (UD) with Kiarash Aminfar &amp; Dr. Lattanzi (GMU)">
+            <figcaption>HRG (UD) with Kiarash Aminfar &amp; Dr. Lattanzi (GMU)</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/river-camera.jpg" alt="Imetrum DMS camera trained on the span">
+            <figcaption>Imetrum DMS camera trained on the span</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/river-traffic.jpg" alt="Monitoring live-load traffic">
+            <figcaption>Monitoring live-load traffic</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/river-setup.jpg" alt="Setting up the DMS camera &amp; controller">
+            <figcaption>Setting up the DMS camera &amp; controller</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/river-team.jpg" alt="HRG (UD) with Kiarash Aminfar &amp; Dr. Lattanzi (GMU)">
+            <figcaption>HRG (UD) with Kiarash Aminfar &amp; Dr. Lattanzi (GMU)</figcaption>
+          </figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project project-album" id="p04">
+        <div class="project-num mono">P / 04</div>
+        <div class="project-body">
+          <span class="mono project-tag">Rail monitoring · FRA</span>
+          <h3>Track testing on the FRA High Tonnage Loop &amp; the HTL Center.</h3>
+          <p>
+            Rail monitoring in Letterkenny, PA (Dec 2023) and track testing on
+            the 2.7-mile High Tonnage Loop at the Transportation Technology
+            Center, part of a Federal Railroad Administration program with
+            ENSCO Rail. The effort fed into UD's new <strong>$14.4M FRA CRISI
+            HTL Center</strong> for training the next generation of railroad
+            technical professionals.
+          </p>
+          <div class="method-tags"><span class="mtag">DIC</span><span class="mtag">field instrumentation</span></div>
+          <dl class="project-meta">
+            <div><dt class="mono">PI</dt><dd>Prof. Monique Head</dd></div>
+            <div><dt class="mono">Partners</dt><dd>ENSCO, FRA, Oklahoma State, Morgan State, Michigan Tech, +more</dd></div>
+            <div><dt class="mono">My role</dt><dd>Field testing &amp; monitoring</dd></div>
+            <div><dt class="mono">Highlight</dt><dd>$14.4M CRISI award announced March 2025</dd></div>
+          </dl>
+        </div>
+        <div class="project-sweep">
+          <div class="project-sweep-track">
+<figure class="album-cell">
+            <img src="images/htl-letterkenny.jpg" alt="Rail monitoring · Letterkenny, PA · Dec 14 2023 (with J. Dzeble &amp; H. Thompson, FRA)">
+            <figcaption>Rail monitoring · Letterkenny, PA · Dec 14 2023 (with J. Dzeble &amp; H. Thompson, FRA)</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/htl-camera.jpg" alt="Imetrum DMS camera &amp; controller beside the rail">
+            <figcaption>Imetrum DMS camera &amp; controller beside the rail</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/htl-axle.jpg" alt="Adjusting wheel-axle alignment over the monitoring point">
+            <figcaption>Adjusting wheel-axle alignment over the monitoring point</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/htl-cameras.jpg" alt="Setting up the cameras">
+            <figcaption>Setting up the cameras</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/htl-letterkenny.jpg" alt="Rail monitoring · Letterkenny, PA · Dec 14 2023 (with J. Dzeble &amp; H. Thompson, FRA)">
+            <figcaption>Rail monitoring · Letterkenny, PA · Dec 14 2023 (with J. Dzeble &amp; H. Thompson, FRA)</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/htl-camera.jpg" alt="Imetrum DMS camera &amp; controller beside the rail">
+            <figcaption>Imetrum DMS camera &amp; controller beside the rail</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/htl-axle.jpg" alt="Adjusting wheel-axle alignment over the monitoring point">
+            <figcaption>Adjusting wheel-axle alignment over the monitoring point</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/htl-cameras.jpg" alt="Setting up the cameras">
+            <figcaption>Setting up the cameras</figcaption>
+          </figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project project-album" id="p05">
+        <div class="project-num mono">P / 05</div>
+        <div class="project-body">
+          <span class="mono project-tag">Coastal infrastructure</span>
+          <h3>Lewes living shoreline: coastal structural monitoring.</h3>
+          <p>
+            Field deployments along the Lewes living shoreline, a project that
+            uses natural materials and engineered structures to combat rising
+            seas and coastal storms. We monitor the bridges and structures with
+            vision-based measurement to track behavior under tidal cycles and
+            storm loading.
+          </p>
+          <div class="method-tags"><span class="mtag">vision-based sensing</span><span class="mtag">tidal monitoring</span></div>
+          <dl class="project-meta">
+            <div><dt class="mono">Status</dt><dd>Writeup in progress</dd></div>
+            <div><dt class="mono">Press</dt><dd><a href="https://www.coasttv.com/news/lewes-living-shoreline-aims-to-combat-rising-seas-and-coastal-storms/article_9e04b38a-fd8e-44c7-9eb7-77b6ff387b90.html" target="_blank" rel="noopener">CoastTV, video coverage →</a></dd></div>
+          </dl>
+        </div>
+        <div class="project-sweep">
+          <div class="project-sweep-track">
+<figure class="album-cell">
+            <img src="images/lewes-shoreline.jpg" alt="HRG on the Living Shoreline installation">
+            <figcaption>HRG on the Living Shoreline installation</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/lewes-team-gary.jpg" alt="L→R: me, Ali Jarrar (MS student), Gary Wenczel (lab manager)">
+            <figcaption>L→R: me, Ali Jarrar (MS student), Gary Wenczel (lab manager)</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/lewes-gary-sensor.jpg" alt="Mounting a sensor in the water beneath the bridge, with Gary and Ali">
+            <figcaption>Mounting a sensor in the water beneath the bridge, with Gary and Ali</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/lewes-04.jpg" alt="Lewes field day">
+            <figcaption>Lewes field day</figcaption>
+          </figure>
+<figure class="album-cell">
+            <img src="images/lewes-05.jpg" alt="Lewes field day">
+            <figcaption>Lewes field day</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/lewes-shoreline.jpg" alt="HRG on the Living Shoreline installation">
+            <figcaption>HRG on the Living Shoreline installation</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/lewes-team-gary.jpg" alt="L→R: me, Ali Jarrar (MS student), Gary Wenczel (lab manager)">
+            <figcaption>L→R: me, Ali Jarrar (MS student), Gary Wenczel (lab manager)</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/lewes-gary-sensor.jpg" alt="Mounting a sensor in the water beneath the bridge, with Gary and Ali">
+            <figcaption>Mounting a sensor in the water beneath the bridge, with Gary and Ali</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/lewes-04.jpg" alt="Lewes field day">
+            <figcaption>Lewes field day</figcaption>
+          </figure>
+<figure class="album-cell" aria-hidden="true">
+            <img src="images/lewes-05.jpg" alt="Lewes field day">
+            <figcaption>Lewes field day</figcaption>
+          </figure>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications" data-screen-label="05 Publications">
+    <div class="section-head">
+      <div class="label mono">§ 04, Publications</div>
+      <h2>Selected writing.</h2>
+    </div>
+
+    <div class="pub-group-label mono" id="pub-journal">Journal articles</div>
+    <div class="pubs">
+      <article class="pub">
+        <span class="year">2025</span>
+        <div>
+          <h3 class="title">Structural assessment of rehabilitated culverts under momentary loads using vision-based measurements and model calibration.</h3>
+          <div class="venue">Safari, S. &amp; Head, M.H. · <em>Engineering Structures</em>, 336, 120436.</div>
+        </div>
+        <span class="type">Journal</span>
+      </article>
+      <article class="pub">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Diagnostic load testing and assessment of a corroded corrugated metal pipe culvert before rehabilitation.</h3>
+          <div class="venue">Safari, S., DuBose, T., Head, M.H., Shenton III, H.W., Tatar, J., Chajes, M.J., Karam, J., &amp; Hastings, J.N. · <em>Structure and Infrastructure Engineering</em>, 20(7–8), 1149–1158.</div>
+        </div>
+        <span class="type">Journal</span>
+      </article>
+      <article class="pub">
+        <span class="year">2025</span>
+        <div>
+          <h3 class="title">Signal processing–driven virtual sensors for vision-based dynamic structural monitoring.</h3>
+          <div class="venue">Safari, S., Head, M., &amp; Aloqaily, W. · Journal, TBD · manuscript in preparation.</div>
+        </div>
+        <span class="type">In preparation</span>
+      </article>
+    </div>
+
+    <div class="pub-group-label mono" id="pub-conf">Conference &amp; reports</div>
+    <div class="pubs">
+      <article class="pub">
+        <span class="year">2026</span>
+        <div>
+          <h3 class="title">Data fusion framework for vision-based structural characterization and finite element model updating of short-span bridges.</h3>
+          <div class="venue">Safari, S. &amp; Head, M. · IABMAS 2026, Orlando, FL.</div>
+        </div>
+        <span class="type">Conference</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Multimodal computer vision framework for improved hydraulic structural inspection.</h3>
+          <div class="venue">Safari, S., Head, M., Aminfar, K., &amp; Lattanzi, D. · AISIM 2024, CU Boulder, CO.</div>
+        </div>
+        <div class="talk-media"><figure><img src="images/aisim-2024.jpg" alt="AISIM 2024 · CU Boulder"><figcaption>AISIM 2024 · THE UNIVERSITY OF COLORADO BOULDER</figcaption></figure></div>
+        <span class="type">Presentation</span>
+      </article>
+      <article class="pub">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Multi-robot teaming for inspection of hydraulic structures.</h3>
+          <div class="venue">Lattanzi, D., Aminfar, K., Head, M., &amp; Safari, S. · CIAM-UTC-REG51, CIAMTIS (UTC).</div>
+        </div>
+        <span class="type">Tech. report</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Non-contact sensing technology to inform digital twins in bridge engineering.</h3>
+          <div class="venue">Head, M. &amp; Safari, S. · World Bridge Engineering Conference, Miami, FL.</div>
+        </div>
+        <div class="talk-media"><figure><img src="images/abc-miami-2024.jpg" alt="ABC / World Bridge Eng. Conf · Miami, FL"><figcaption>ABC / World Bridge Eng. Conf · Miami, FL</figcaption></figure></div>
+        <span class="type">Conference</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2023</span>
+        <div>
+          <h3 class="title">Vision-based measurements for monitoring a rehabilitated corrugated metal pipe culvert.</h3>
+          <div class="venue">Safari, S., Head, M.H., &amp; DuBose, T. · Structures Congress 2023, pp. 416–434.</div>
+        </div>
+        <span class="type">Conference</span>
+        <div class="talk-media"><figure><img src="images/asce-2023-dic.jpg" alt="Presenting at ASCE Structures Congress 2023"><figcaption>STRUCTURES CONGRESS 2023 · NEW ORLEANS, LA</figcaption></figure><figure><img src="images/asce-2023-group.jpg" alt="HEAD Research Group at Structures Congress 2023"><figcaption>HRG at Structures Congress · New Orleans, LA</figcaption></figure></div>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2023</span>
+        <div>
+          <h3 class="title">Non-contact structural monitoring of a railway bridge.</h3>
+          <div class="venue">Head, M., Safari, S., Aloqaily, W., &amp; Obayes, S. · 11th NYC Bridge Conference, CRC Press.</div>
+        </div>
+        <div class="talk-media"><figure><img src="images/nyc-bridge-2023.jpg" alt="11th NYC Bridge Conference · Aug 2023"><figcaption>11th NYC Bridge Conference · Aug 2023</figcaption></figure></div>
+        <span class="type">Conference</span>
+      </article>
+      <article class="pub">
+        <span class="year">2022</span>
+        <div>
+          <h3 class="title">Diagnostic load testing and assessment of a rehabilitated culvert with spray applied pipe liner.</h3>
+          <div class="venue">DuBose, T., Safari, S., Shenton, H.W., Tatar, J., Chajes, M.J., Karam, J., Hastings, J.N., &amp; Head, M.H. · IABMAS Proceedings, CRC Press, pp. 1344–1352.</div>
+        </div>
+        <span class="type">Conference</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2022</span>
+        <div>
+          <h3 class="title">Vision-based measurements for dynamic evaluation of structures.</h3>
+          <div class="venue">Safari, S., Obayes, S., Aloqaily, W., &amp; Head, M. · EMI/PMC 2022, Baltimore, MD.</div>
+        </div>
+        <div class="talk-media"><figure><img src="images/emi-2022.jpg" alt="EMI/PMC 2022 · Johns Hopkins"><figcaption>EMI/PMC 2022 · JOHNS HOPKINS UNIVERSITY</figcaption></figure><figure><img src="images/emi-campus.jpg" alt="On the Johns Hopkins campus"><figcaption>ON THE JOHNS HOPKINS UNIVERSITY CAMPUS</figcaption></figure></div>
+        <span class="type">Conference</span>
+      </article>
+    </div>
+
+    <div class="pub-group-label mono" id="pub-talks">Invited talks &amp; guest lectures</div>
+    <div class="pubs pubs-talks">
+      <article class="pub pub-talk">
+        <span class="year">2026</span>
+        <div>
+          <h3 class="title"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7449633618437591040/" target="_blank" rel="noopener">Lightning talk to the External Advisory Council ↗</a></h3>
+          <div class="venue">Dept. of Civil &amp; Environmental Engineering, University of Delaware · April 2026.</div>
+          <a class="slides-link" href="https://drive.google.com/file/d/1RHa-kmCChLt8dARXT1YOQZfQs_PWwhH7/view" target="_blank" rel="noopener">View slides ↗</a>
+        </div>
+        <div class="talk-media"><figure><img src="images/eac-lightning-2026.jpg" alt="Lightning talk to the UD CEE External Advisory Council, April 2026"><figcaption>External Advisory Council · April 2026</figcaption></figure></div>
+        <span class="type">Lightning talk</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2026</span>
+        <div>
+          <h3 class="title">Finite element modeling and load rating of bridges.</h3>
+          <div class="venue">Guest lecture · CIEG 608 Highway Bridge Engineering, University of Delaware.</div>
+        </div>
+        <span class="type">Guest lecture</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2025</span>
+        <div>
+          <h3 class="title">Innovative structures and material applications.</h3>
+          <div class="venue">Guest lecture · CIEG 214 Construction Materials, University of Delaware.</div>
+        </div>
+        <span class="type">Guest lecture</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Vision-based measurements for load testing and evaluation.</h3>
+          <div class="venue">Safari, S. &amp; Head, M. · ABERA 2024 Workshop, University of Delaware.</div>
+          <a class="slides-link" href="https://drive.google.com/file/d/19XoIyfGMeWgo5NQWo53BMDkJXoYCxGuX/view" target="_blank" rel="noopener">View slides ↗</a>
+        <div class="talk-media"><figure><img src="images/abera-load.jpg" alt="ABERA 2024 · load-testing talk"><figcaption>ABERA 2024 · LOAD-TESTING TALK, UD</figcaption></figure></div>
+        </div>
+        <span class="type">Invited talk</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Non-contact vision-based measurements for bridge evaluation.</h3>
+          <div class="venue">Safari, S. · ABERA 2024 Workshop, University of Delaware.</div>
+          <a class="slides-link" href="https://drive.google.com/file/d/1kMeZ9J-srS8XcNJ6BKqsyxX05_CO291g/view" target="_blank" rel="noopener">View slides ↗</a>
+        <div class="talk-media"><figure><img src="images/abera-bridge.jpg" alt="ABERA 2024 · bridge-evaluation talk"><figcaption>ABERA 2024 · BRIDGE-EVALUATION TALK, UD</figcaption></figure></div>
+        </div>
+        <span class="type">Invited talk</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2024</span>
+        <div>
+          <h3 class="title">Vision-based bridge monitoring and evaluation, live demo.</h3>
+          <div class="venue">Safari, S. · ABERA 2024 Workshop, University of Delaware.</div>
+          <a class="slides-link" href="https://drive.google.com/file/d/1n6Lkhyrb2_Pu22AwrlXoqxlaRtZD8Mgn/view" target="_blank" rel="noopener">View slides ↗</a>
+        <div class="talk-media"><figure><img src="images/abera-demo.jpg" alt="ABERA 2024 · live DIC demo"><figcaption>ABERA 2024 · LIVE DIC DEMO, UD</figcaption></figure></div>
+        </div>
+        <span class="type">Demonstration</span>
+      </article>
+      <article class="pub pub-talk">
+        <span class="year">2022</span>
+        <div>
+          <h3 class="title">Evaluation of progressive collapse potential in a pedestrian tensegrity bridge.</h3>
+          <div class="venue">Guest lecture · CIEG 608 Highway Bridge Engineering, University of Delaware.</div>
+        </div>
+        <span class="type">Guest lecture</span>
+      </article>
+    </div>
+
+    <div class="pub-cta">
+      <a href="https://scholar.google.com/citations?user=7BaPscsAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">Full list on Google Scholar →</a>
+      <span style="margin: 0 16px; color: var(--rule);">·</span>
+      <a href="https://www.researchgate.net/profile/Sajjad-Safari" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">ResearchGate →</a>
+      <span style="margin: 0 16px; color: var(--rule);">·</span>
+      <a href="https://orcid.org/0000-0002-6423-6405" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">ORCID →</a>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teaching" data-screen-label="06 Teaching">
+    <div class="section-head">
+      <div class="label mono">§ 05, Teaching</div>
+      <h2>In the<br><em>classroom.</em></h2>
+    </div>
+
+    <div class="teaching-stack">
+
+      <article class="teach-card teach-card-feature" id="teach-upcoming" style="border-color: rgb(255, 210, 0)">
+        <header>
+          <span class="teach-badge">Upcoming</span>
+          <div class="teach-term mono">University of Delaware</div>
+          <div class="teach-course">Structural Analysis &amp; Design</div>
+          <div class="teach-instructor">
+            <span class="mono">INSTRUCTOR OF RECORD</span>
+            <a href="https://ccee.udel.edu/faculty/diana-arboleda/" target="_blank" rel="noopener">Prof. Diana Arboleda ↗</a>
+          </div>
+        </header>
+        <p>
+          Leading discussion sessions and lectures, designing assignments and
+          midterm / final exams, grading, and marking papers.
+        </p>
+      </article>
+
+      <article class="teach-card teach-card-feature" id="teach-608" style="border-color: rgb(255, 210, 0)">
+        <header>
+          <div class="teach-term mono">Spring 2026 · University of Delaware</div>
+          <div class="teach-course">CIEG 608 · Highway Bridge Engineering</div>
+          <div class="teach-instructor">
+            <span class="mono">Instructor of record</span>
+            <a href="https://scholar.google.com/citations?user=UR6Z5QoAAAAJ&amp;hl=en" target="_blank" rel="noopener">Prof. Monique Head ↗</a>
+          </div>
+        </header>
+        <p>
+          Taught <strong>load rating</strong>, advanced member design, and
+          <strong>finite element modeling</strong> for highway bridges. Built and graded
+          modeling assignments and a final report; ran office hours through the semester.
+        </p>
+        <div class="eval-block">
+          <div class="eval-head mono">Student evaluation · n=9</div>
+          <div class="eval-grid">
+            <div class="eval-item">
+              <div class="eval-num">4.6<span>/5</span></div>
+              <div class="eval-label">Subject-matter expertise</div>
+            </div>
+            <div class="eval-item">
+              <div class="eval-num">4.4<span>/5</span></div>
+              <div class="eval-label">Materials &amp; handouts</div>
+            </div>
+            <div class="eval-item">
+              <div class="eval-num">4.2<span>/5</span></div>
+              <div class="eval-label">Theory → AASHTO practice</div>
+            </div>
+            <div class="eval-item eval-headline">
+              <div class="eval-num">4.7<span>/5</span></div>
+              <div class="eval-label">Would recommend</div>
+            </div>
+          </div>
+          <blockquote style="background-color: rgb(255, 210, 0)">
+            <span style="color: rgb(0, 60, 113)">“Detailed and methodical presentations made concepts easy to follow. Everything was cited and even color-coded. He was also incredibly approachable after class.”</span>
+            <cite style="color: rgb(99, 145, 203)">,  Student, CIEG 608, Spring 2026</cite>
+          </blockquote>
+        </div>
+      </article>
+
+      <div class="teach-trio">
+      <article class="teach-card" id="teach-214" style="background-color: rgb(255, 210, 0)">
+        <header>
+          <div class="teach-term mono" style="color: rgb(0, 83, 159)">Spring 2025 · University of Delaware</div>
+          <div class="teach-course" style="color: rgb(0, 160, 223)">CIEG 214 · Construction Materials</div>
+          <div class="teach-instructor">
+            <span class="mono" style="color: rgb(0, 83, 159)">Instructor of record</span>
+            <a href="https://www.linkedin.com/in/jim-pappas-8a75b82a9/" target="_blank" rel="noopener" style="color: rgb(0, 83, 159)">Prof. Jim Pappas ↗</a>
+          </div>
+        </header>
+        <p style="color: rgb(0, 60, 113)">
+          Delivered lectures, graded assignments, and held office hours.
+        </p>
+      </article>
+
+      <article class="teach-card" id="teach-steel" style="background-color: rgb(255, 210, 0)">
+        <header>
+          <div class="teach-term mono" style="color: rgb(0, 60, 113)">2017–2018 · University of Tehran</div>
+          <div class="teach-course" style="color: rgb(0, 160, 223)">Advanced Steel Structures</div>
+          <div class="teach-instructor">
+            <span class="mono" style="color: rgb(0, 60, 113)">Instructor of record</span>
+            <a href="https://scholar.google.com/citations?user=pumhGj4AAAAJ&amp;hl=en" target="_blank" rel="noopener" style="color: rgb(0, 83, 159)">Prof. Ghiami Azad ↗</a>
+          </div>
+        </header>
+        <p style="color: rgb(0, 60, 113)">
+          Lectured, designed assignments and midterm / final exams, and marked
+          papers.
+        </p>
+      </article>
+
+      <article class="teach-card" id="teach-tutor" style="background-color: rgb(255, 210, 0)">
+        <header>
+          <div class="teach-term mono">2011–2015</div>
+          <div class="teach-course" style="color: rgb(0, 160, 223)">Mathematics &amp; Physics tutor</div>
+        </header>
+        <p style="color: rgb(0, 60, 113)">
+          Private and group tutoring for university-entrance preparation.
+        </p>
+      </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" data-screen-label="07 Experience">
+    <div class="section-head">
+      <div class="label mono">§ 06, Experience</div>
+      <h2>Education,<br><em>service, awards.</em></h2>
+    </div>
+
+    <div class="exp-grid">
+      <div class="exp-col" id="exp-education">
+        <div class="col-label mono" style="color: rgb(255, 210, 0)">Education</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year mono">2021–2026</div>
+            <div class="tl-body">
+              <div class="tl-title">Ph.D., Structural Engineering</div>
+              <div class="tl-sub">University of Delaware · Newark, DE</div>
+              <div class="tl-note">Advisor: Prof. Monique Head · GPA 4.0 / 4.0</div>
+              <div class="tl-note"><em>“Formulations for Data-Fusion-Enhanced Deployment of Digital Image Correlation Systems in Structural Evaluation.”</em></div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2015–2018</div>
+            <div class="tl-body">
+              <div class="tl-title">M.Sc., Structural Engineering</div>
+              <div class="tl-sub">University of Tehran · Tehran, Iran</div>
+              <div class="tl-note">Advisor: Prof. Mohammad Khanmohammadi · Thesis grade: Excellent</div>
+              <div class="tl-note"><em>“Evaluation of Progressive Failure of Pedestrian Tensegrity Bridges.”</em></div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2011–2015</div>
+            <div class="tl-body">
+              <div class="tl-title">B.Sc., Civil Engineering</div>
+              <div class="tl-sub">University of Tehran · Tehran, Iran</div>
+              <div class="tl-note">GPA 3.74 / 4 · Ranked 8th in graduating class.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-col" id="exp-awards">
+        <div class="col-label mono" style="color: rgb(255, 210, 0)">Awards &amp; honors</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year mono">2022</div>
+            <div class="tl-body">
+              <div class="tl-title"><a href="https://www.linkedin.com/posts/structures22-seifuturesfund-share-6915644874570489856-cqL9/" target="_blank" rel="noopener">SEI Student Scholarship ↗</a></div>
+              <div class="tl-sub">Structures Congress · ASCE, Atlanta, GA</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2017</div>
+            <div class="tl-body">
+              <div class="tl-title">3rd place, National Blue-Sky Ideas Competition</div>
+              <div class="tl-sub">Iranian National Elite Foundation, Tehran</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2015–2018</div>
+            <div class="tl-body">
+              <div class="tl-title">M.Sc. Fellowship</div>
+              <div class="tl-sub">Exceptional Talent Award
+University of Tehran</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2011–2015</div>
+            <div class="tl-body">
+              <div class="tl-title">B.Sc. Fellowship</div>
+              <div class="tl-sub">Exceptional Talent Award
+University of Tehran</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2011</div>
+            <div class="tl-body">
+              <div class="tl-title">Ranked 215 / 284,000</div>
+              <div class="tl-sub">Iran Nationwide University Entrance Exam</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-col" id="exp-service">
+        <div class="col-label mono" style="color: rgb(255, 210, 0)">Leadership &amp; service</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year mono">2025–·</div>
+            <div class="tl-body">
+              <div class="tl-title"><a href="https://www.linkedin.com/posts/sajjad-safari_ud-leadership-graduatecommunity-share-7381012294824259584-uqny/" target="_blank" rel="noopener">Chair, Iranian Graduate Student Organization ↗</a></div>
+              <div class="tl-sub">University of Delaware</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2024–25</div>
+            <div class="tl-body">
+              <div class="tl-title">President, CCEEGSA</div>
+              <div class="tl-sub">Civil, Construction &amp; Environmental Engineering Graduate Student Association
+University of Delaware</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2022–24</div>
+            <div class="tl-body">
+              <div class="tl-title">Co-lead Mentor, EmPOWER</div>
+              <div class="tl-sub">College of Engineering
+University of Delaware</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2016–21</div>
+            <div class="tl-body">
+              <div class="tl-title">Structural Consultant &amp; Project Controller</div>
+              <div class="tl-sub">NAHAKI Design Studio, Tehran</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2021–·</div>
+            <div class="tl-body">
+              <div class="tl-title">Member, ASCE / SEI</div>
+              <div class="tl-sub">American Society of Civil Engineers</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year mono">2025–·</div>
+            <div class="tl-body">
+              <div class="tl-title">Member, New York Road Runners (NYRR)</div>
+              <div class="tl-sub">Running community &amp; race-day volunteering</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND -->
+  <section id="beyond" data-screen-label="08 Beyond">
+    <div class="section-head">
+      <div class="label mono">§ 07, Beyond research</div>
+      <h2>The rest of<br>the life.</h2>
+    </div>
+    <div class="beyond-grid">
+      <div class="card b-physical" id="beyond-physical" style="background-color: rgb(255, 210, 0); border-color: rgb(255, 255, 255)">
+        <span class="mono" style="color: rgb(0, 60, 113)">On physical health</span>
+        <div class="b-big" style="color: rgb(0, 60, 113)">Necessary sweats.</div>
+        <p style="color: rgb(0, 160, 223)">Sometimes on running, sometimes on cold iron weights, and sometimes on swimming. Next goal? Maybe an IRONMAN 70.3; maybe the full. Who knows.</p>
+      </div>
+
+      <div class="card dark b-numbers" id="beyond-numbers">
+        <span class="mono">On numbers</span>
+        <div class="num-lines">
+          <div class="nl"><b>26.2 or 42.2</b><span>Doesn't matter. Run, run, run.</span></div>
+          <div class="nl"><b>Bib #3629</b><span>First full, finished smiling.</span></div>
+          <div class="nl"><b>&lt;4 done!</b><span>&lt;3 someday, maybe.</span></div>
+          <div class="nl"><b>9 + 1 = 42.2</b><span>NYC 2027 · NYRR.</span></div>
+        </div>
+      </div>
+
+      <div class="card b-mental" id="beyond-mental" style="background-color: rgb(0, 60, 113); border-color: rgb(255, 210, 0)">
+        <span class="mono">On mental health</span>
+        <div class="b-big" style="color: rgb(255, 255, 255)">Music, art, the (somehow) quiet stuff.</div>
+        <p style="color: rgb(255, 210, 0)">A camera in hand since 2014, plus part-time freelance work shooting seminars, concerts, and school events. A steady playlist for listening and watching. And games, whether a board game with friends or a football match on the screen.</p>
+      </div>
+
+      <div class="photo-row">
+        <div class="photo-track">
+          <figure class="photo-cell">
+            <img src="images/2023-09-15_18-53-35_505.jpeg" alt="Dusk on the hill · 2023">
+            <figcaption>Dusk on the hill · 2023</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/IMG_4823.JPG" alt="Class of 2026 Ph.D. hooding">
+            <figcaption>Class of 2026 Ph.D. hooding</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/2024-03-23_19-09-19_151.jpeg" alt="Moon &amp; silence · 2024">
+            <figcaption>Moon &amp; silence · 2024</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/IMG_4912.JPG" alt="Go Hens 2026">
+            <figcaption>Go Hens 2026</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/2023-08-28_19-49-59_917.jpeg" alt="Lake on fire · 2023">
+            <figcaption>Lake on fire · 2023</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/copy.JPG" alt="Friends on hooding 2026">
+            <figcaption>Friends on hooding 2026</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/2022-02-01_17-00-52_373.jpeg" alt="Contrail at dusk · 2022">
+            <figcaption>Contrail at dusk · 2022</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/IMG_4760.JPG" alt="At the podium with my advisor Dr. Head, Dean Dr. Norris, and UD President Dr. Carlson">
+            <figcaption>At the podium with my advisor Dr. Head, Dean Dr. Norris, and UD President Dr. Carlson</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/marathon-jersey-city.jpg" alt="Jersey City Marathon · finish line 2026">
+            <figcaption>Jersey City Marathon · finish line 2026</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/IMG_4928.JPG" alt="With Prof. Head">
+            <figcaption>With Prof. Head</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/2023-07-19_20-48-50_472.jpeg" alt="Crescent in the heart of clouds · 2023">
+            <figcaption>Crescent in the heart of clouds · 2023</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/IMG_6186.JPEG" alt="The PhD class of 2026 · Dept. of CCEE at UD">
+            <figcaption>The PhD class of 2026 · Dept. of CCEE at UD</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/IMG_4906.JPEG" alt="Hooded · UD 2026">
+            <figcaption>Hooded · UD 2026</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/unnamed.jpg" alt="Blue Hen, finally · 2026">
+            <figcaption>Blue Hen, finally · 2026</figcaption>
+          </figure>
+          <figure class="photo-cell">
+            <img src="images/ee239374-a28f-415b-9832-1d01b0d85442.jpg" alt="College of Engineering convocation 2026">
+            <figcaption>College of Engineering convocation 2026</figcaption>
+          </figure>
+          <!-- duplicate set for seamless loop -->
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/2023-09-15_18-53-35_505.jpeg" alt="">
+            <figcaption>Dusk on the hill · 2023</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/IMG_4823.JPG" alt="">
+            <figcaption>Class of 2026 Ph.D. hooding</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/2024-03-23_19-09-19_151.jpeg" alt="">
+            <figcaption>Moon &amp; silence · 2024</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/IMG_4912.JPG" alt="">
+            <figcaption>Go Hens 2026</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/2023-08-28_19-49-59_917.jpeg" alt="">
+            <figcaption>Lake on fire · 2023</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/copy.JPG" alt="">
+            <figcaption>Friends on hooding 2026</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/2022-02-01_17-00-52_373.jpeg" alt="">
+            <figcaption>Contrail at dusk · 2022</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/IMG_4760.JPG" alt="">
+            <figcaption>At the podium with my advisor Dr. Head, Dean Dr. Norris, and UD President Dr. Carlson</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/marathon-jersey-city.jpg" alt="">
+            <figcaption>Jersey City Marathon · finish line 2026</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/IMG_4928.JPG" alt="">
+            <figcaption>With Prof. Head</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/2023-07-19_20-48-50_472.jpeg" alt="">
+            <figcaption>Crescent in the heart of clouds · 2023</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/IMG_6186.JPEG" alt="">
+            <figcaption>The PhD class of 2026 · Dept. of CCEE at UD</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/IMG_4906.JPEG" alt="">
+            <figcaption>Hooded · UD 2026</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/unnamed.jpg" alt="">
+            <figcaption>Blue Hen, finally · 2026</figcaption>
+          </figure>
+          <figure class="photo-cell" aria-hidden="true">
+            <img src="images/ee239374-a28f-415b-9832-1d01b0d85442.jpg" alt="">
+            <figcaption>College of Engineering convocation 2026</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="photo-credit" style="grid-column: span 12; margin-top: 18px;">PHOTOGRAPHS BY SAJJAD SAFARI AND HIS FRIENDS.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" data-screen-label="09 Contact">
+    <div class="contact-grid">
+      <div>
+        <div class="mono" style="margin-bottom: 20px;">§ 08, Contact</div>
+        <h2>Say <em>hello.</em></h2>
+        <p style="font-family: var(--serif); font-size: 22px; line-height: 1.4; color: var(--ink-2); font-style: italic; max-width: 420px;">
+          For research, collaboration, a slow run, or a quiet trade in photographs, the door is open.
+        </p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:safari@udel.edu">
+          <span class="label">Email</span>
+          <span class="val">safari@udel.edu</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://scholar.google.com/citations?user=7BaPscsAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <span class="label">Scholar</span>
+          <span class="val">Google Scholar</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/sajjad-safari/" target="_blank" rel="noopener">
+          <span class="label">LinkedIn</span>
+          <span class="val">linkedin.com/in/sajjad-safari</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://www.researchgate.net/profile/Sajjad-Safari" target="_blank" rel="noopener">
+          <span class="label">ResearchGate</span>
+          <span class="val">researchgate.net/profile/Sajjad-Safari</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://orcid.org/0000-0002-6423-6405" target="_blank" rel="noopener">
+          <span class="label">ORCID</span>
+          <span class="val">0000-0002-6423-6405</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://sites.udel.edu/head/" target="_blank" rel="noopener">
+          <span class="label">Lab</span>
+          <span class="val">HEAD Research Group</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>© 2026 Sajjad Safari · Newark, DE</div>
+  <div>Tehran → Newark · Updated May 2026</div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const { useTweaks, TweaksPanel, TweakSection, TweakColor, TweakToggle, TweakRadio } = window;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#ffd200",
+  "dark": true,
+  "displayFont": "Calibri"
+}/*EDITMODE-END*/;
+
+const ACCENTS = [
+  "#00539f", // UD blue (default)
+  "#003c71", // UD navy
+  "#ffd200", // UD yellow
+  "#00a0df"  // UD light blue
+];
+
+const FONTS = ["Calibri", "Carlito", "System sans"];
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--accent', t.accent);
+    // also soft variant via color-mix wouldn't update, so compute:
+    document.documentElement.classList.toggle('dark', !!t.dark);
+  }, [t.accent, t.dark]);
+
+  React.useEffect(() => {
+    // swap display font by setting --serif
+    const map = {
+      "Calibri": "'Calibri', 'Carlito', sans-serif",
+      "Carlito": "'Carlito', sans-serif",
+      "System sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    };
+    document.documentElement.style.setProperty('--serif', map[t.displayFont] || map["Calibri"]);
+  }, [t.displayFont]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Color">
+        <TweakColor
+          label="Accent"
+          value={t.accent}
+          options={ACCENTS}
+          onChange={v => setTweak('accent', v)}
+        />
+        <TweakToggle
+          label="Dark mode"
+          value={t.dark}
+          onChange={v => setTweak('dark', v)}
+        />
+      </TweakSection>
+      <TweakSection label="Type">
+        <TweakRadio
+          label="Display font"
+          value={t.displayFont}
+          options={FONTS}
+          onChange={v => setTweak('displayFont', v)}
+        />
+      </TweakSection>
+    </TweaksPanel>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App />);
+</script>
+
+<!-- Smooth scroll for anchor links -->
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+<!-- Talk thumbnails, small preview in the row that expands on hover -->
+<script>
+(function () {
+  document.querySelectorAll('.pub-talk').forEach(row => {
+    const firstImg = row.querySelector('.talk-media img');
+    const year = row.querySelector('.year');
+    if (!firstImg || !year || year.querySelector('.talk-thumb')) return;
+    const thumb = document.createElement('img');
+    thumb.className = 'talk-thumb';
+    thumb.src = firstImg.getAttribute('src');
+    thumb.alt = '';
+    thumb.loading = 'lazy';
+    year.appendChild(thumb);
+  });
+})();
+</script>
+
+<!-- Photography marquee, steer with the mouse: edges sweep fast, middle drifts slow -->
+<script>
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // leave static for reduced-motion users
+
+  function initSweep(row, track, opts) {
+    if (!row || !track) return;
+    opts = opts || {};
+    track.classList.add('js-driven');
+    const gap = parseFloat(getComputedStyle(track).gap) || 16;
+    let half = 0;
+    const measure = () => { half = (track.scrollWidth + gap) / 2; };
+    measure();
+    window.addEventListener('resize', measure);
+    if (window.ResizeObserver) new ResizeObserver(measure).observe(track);
+    track.querySelectorAll('img').forEach(img => {
+      if (!img.complete) img.addEventListener('load', measure, { once: true });
+    });
+
+    const DRIFT = opts.drift || 38;
+    const MIN   = 12;
+    const MAX   = opts.max || 900;
+    const DEAD  = 0.10;
+
+    let offset = 0;
+    let target = -DRIFT;
+    let vel = -DRIFT;
+    let last = performance.now();
+
+    row.addEventListener('pointermove', e => {
+      const rect = row.getBoundingClientRect();
+      let n = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      n = Math.max(-1, Math.min(1, n));
+      if (Math.abs(n) < DEAD) {
+        target = -MIN;
+      } else {
+        const t = (Math.abs(n) - DEAD) / (1 - DEAD);
+        const mag = MIN + t * t * (MAX - MIN);
+        target = Math.sign(n) * mag;
+      }
+    });
+    row.addEventListener('pointerleave', () => { target = -DRIFT; });
+
+    function frame(now) {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      vel += (target - vel) * Math.min(1, dt * 6);
+      offset -= vel * dt;
+      if (half > 0) {
+        if (offset <= -half) offset += half;
+        else if (offset > 0) offset -= half;
+      }
+      track.style.transform = 'translateX(' + offset.toFixed(2) + 'px)';
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Beyond photography marquee
+  const beyondRow = document.querySelector('.beyond-grid .photo-row');
+  if (beyondRow) initSweep(beyondRow, beyondRow.querySelector('.photo-track'), { drift: 38, max: 900 });
+
+  // Field-project marquees
+  document.querySelectorAll('.project-sweep').forEach(row => {
+    initSweep(row, row.querySelector('.project-sweep-track'), { drift: 28, max: 700 });
+  });
+})();
+</script>
+
+</body>
+</html>
